@@ -72,6 +72,15 @@
   </dependencies>
 
   <build>
+    <extensions>
+      <!-- Add support for the "deb" packaging -->
+      <extension>
+        <groupId>org.vafer</groupId>
+        <artifactId>jdeb</artifactId>
+        <version>1.10</version>
+      </extension>
+    </extensions>
+
     <plugins>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -213,6 +222,49 @@
                     <argument>${project.version}</argument>
                     <argument>${project.build.directory}</argument>
                   </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>deb</id>
+      <activation>
+        <property>
+          <name>deb</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.vafer</groupId>
+            <artifactId>jdeb</artifactId>
+            <version>1.8</version> <!-- Use the appropriate version -->
+            <executions>
+              <execution>
+                <id>package-deb</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jdeb</goal>
+                </goals>
+                <configuration>
+                  <controlDir>${project.basedir}/control</controlDir>
+                  <deb>${project.basedir}/target/hadoop-${project.version}.deb</deb>
+                  <installDir>/opt/${project.artifactId}_${version}</installDir>
+                  <dataSet>
+                      <data>
+                        <src>${project.basedir}/target/hadoop-${project.version}.tar.gz</src>
+                        <dst>/opt/${project.artifactId}_${version}</dst>
+                        <type>archive</type>
+                      </data>
+                      <data>
+                        <src>${project.basedir}/target/hadoop-${project.version}</src>
+                        <dst>/opt/${project.artifactId}_${project.version}</dst>
+                        <type>directory</type>
+                      </data>
+                  </dataSet>
                 </configuration>
               </execution>
             </executions>

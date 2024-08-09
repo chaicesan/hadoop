@@ -1,0 +1,8 @@
+Package: hadoop
+Version: 3.3.6
+Section: misc
+Priority: optional
+Architecture: all
+Maintainer: Data Infrastructure Team
+Description: Hadoop is a distributed computing platform written in Java. It incorporates features to support distributed computing and large-scale data processing. Hadoop is a top-level Apache project being built and used by a global community of contributors. Hadoop was created by Doug Cutting and Mike Cafarella and was inspired by Google's MapReduce and Google File System (GFS) papers.
+Distribution: development

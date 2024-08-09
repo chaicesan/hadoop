@@ -37,7 +37,7 @@ function run()
 }
 
 
-run tar cf "hadoop-${VERSION}.tar" "hadoop-${VERSION}"
+run tar --format=ustar -cf "hadoop-${VERSION}.tar" "hadoop-${VERSION}"
 run gzip -f "hadoop-${VERSION}.tar"
 echo
 echo "Hadoop dist tar available at: ${BASEDIR}/hadoop-${VERSION}.tar.gz"
